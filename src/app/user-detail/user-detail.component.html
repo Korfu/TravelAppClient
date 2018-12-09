@@ -1,0 +1,17 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3">
+      <p class="bold">{{user?.firstName}}</p>
+      <p class="bold">{{user?.lastName}}</p>
+      <p>Visited Countries:</p>
+      <ul *ngFor="let country of user.visitedCountries">
+        <li>{{country.name}}</li>
+      </ul>
+      </div >
+      <div class="col-sm-9">
+        <div class= "map">
+            <img src="assets/images/map.jpg" class="img-fluid">
+        </div>
+      </div>
+    </div>
+</div>

@@ -1,3 +1,33 @@
 <h3>
-  Users works!
+  List of all users
 </h3>
+<table class="table">
+  <thead>
+    <th><p>Id</p></th>
+    <th><p>First Name</p></th>
+    <th><p>Last Name</p></th>
+    <th><p>Visited Countries</p></th>
+  </thead>
+  <tr *ngFor="let user of users">
+    <td>
+      <a>
+        <p>{{user.id}} </p>
+      </a>
+    </td>
+    <td>
+      <a>
+        <p>{{user.firstName}} </p>
+      </a>
+    </td>
+    <td>
+      <a>
+        <p>{{user.lastName}} </p>
+      </a>
+    </td>
+    <td>
+        <a routerLink="/users/{{user.id}}">
+          <button class ="btn btn-primary">See on a map! </button>
+        </a>
+      </td>
+  </tr>
+</table>
