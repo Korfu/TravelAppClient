@@ -22,11 +22,21 @@ export class UserService {
     return this.http.get<User>(url);
   }
 
-  AddUser(user: User) : Observable<User> {
+  AddUser(userToAdd: User) : Observable<User> {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
-    return this.http.post<User>(this.usersURL, user, httpOptions);
+    return this.http.post<User>(this.usersURL, userToAdd, httpOptions);
+  }
+
+  deleteUser(userToDelete: User): any {
+    const id = typeof userToDelete === 'number' ? userToDelete : userToDelete.id;
+    const url = `${this.usersURL}/${id}`;
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+  
+    return this.http.delete<User>(url, httpOptions);
   }
 }
