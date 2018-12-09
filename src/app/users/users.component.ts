@@ -20,4 +20,9 @@ export class UsersComponent implements OnInit {
     this.userService.getUsers().subscribe(users => this.users = users);
   }
 
+  add(userToAdd: User) : void {
+    this.userService.AddUser(userToAdd)
+    .subscribe(user => this.users.push(userToAdd));
+  }
+
 }

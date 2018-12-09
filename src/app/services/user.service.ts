@@ -21,4 +21,12 @@ export class UserService {
     const url = `${this.usersURL}/${id}`;
     return this.http.get<User>(url);
   }
+
+  AddUser(user: User) : Observable<User> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+
+    return this.http.post<User>(this.usersURL, user, httpOptions);
+  }
 }
