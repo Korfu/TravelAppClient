@@ -1,3 +1,10 @@
 <h3>
-  countries works!
+  Countries list!
 </h3>
+<ul>
+  <li *ngFor="let country of countries">
+    <a routerLink="/countries/{{country.id}}">
+      <h4>{{country.name}}</h4>
+    </a>
+  </li>
+</ul>
