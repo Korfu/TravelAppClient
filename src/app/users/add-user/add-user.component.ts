@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CountryService } from 'src/app/services/country.service';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/Models/user';
 
 @Component({
   selector: 'app-add-user',
@@ -8,21 +10,24 @@ import { CountryService } from 'src/app/services/country.service';
   styleUrls: ['./add-user.component.css']
 })
 export class AddUserComponent implements OnInit {
-  userForm: FormGroup;
+  public userForm: FormGroup;
   submitted = false;
   dropdownList = [];
   selectedItems = [];
   dropdownSettings = {};
 
   constructor(private formBuilder: FormBuilder,
-              private countryService: CountryService) {   }
+              private countryService: CountryService,
+              private userService: UserService) {  
+               }
   
   ngOnInit() {
+   
     this.userForm = this.formBuilder.group({
-      'firstName': ['', Validators.required],
-      'lastName': ['', Validators.required],
-      'visitedCountries': ['']
+      firstName: '',
+      lastName:  '',
     })
+
     this.countryService.getCountries().subscribe(countries => this.dropdownList = countries);
     this.selectedItems =[];
     this.dropdownSettings = {
@@ -38,20 +43,13 @@ export class AddUserComponent implements OnInit {
 
   get f() { return this.userForm.controls; }
 
-
   onSubmit() {
-    this.submitted = true;
-    if (this.userForm.invalid){
-      return;
-    }
-
-    alert('Success! '+JSON.stringify(this.userForm.value))
-  }
-
-  saveUser(){
-    if (this.userForm.dirty && this.userForm.valid) {
-      alert(`Name: ${this.userForm.value.firstName}, Last name: ${this.userForm.value.lastName}`)
-    }
+    debugger;
+    let userToAdd : User = new User;
+    userToAdd.visitedCountries = this.selectedItems;
+    userToAdd.firstName = this.userForm.value.firstName;
+    userToAdd.lastName = this.userForm.value.lastName;
+    this.userService.AddUser(userToAdd).subscribe(c => console.log("user has been added!"));
   }
 
   onItemSelect(item: any) {
