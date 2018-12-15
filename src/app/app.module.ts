@@ -6,15 +6,15 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SelectModule } from 'ng2-select';
 import { FormsModule,ReactiveFormsModule }   from '@angular/forms';
 
-
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CountriesComponent } from './countries/countries.component';
 import { UsersComponent } from './users/users.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { UserDetailComponent } from './user-detail/user-detail.component';
-import { DropdownComponent } from './dropdown/dropdown.component';
+import { UserDetailComponent } from './users/user-detail/user-detail.component';
+import { AddUserComponent } from './users/add-user/add-user.component';
+import { EditUserComponent } from './users/edit-user/edit-user.component';
+import { DeleteUserComponent } from './users/delete-user/delete-user.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,9 @@ import { DropdownComponent } from './dropdown/dropdown.component';
     UsersComponent,
     WelcomeComponent,
     UserDetailComponent,
-    DropdownComponent,
+    AddUserComponent,
+    EditUserComponent,
+    DeleteUserComponent,
   ],
   imports: [
     BrowserModule,
