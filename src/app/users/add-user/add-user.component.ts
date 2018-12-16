@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { CountryService } from 'src/app/services/country.service';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/Models/user';
@@ -44,18 +44,10 @@ export class AddUserComponent implements OnInit {
   get f() { return this.userForm.controls; }
 
   onSubmit() {
-    debugger;
     let userToAdd : User = new User;
     userToAdd.visitedCountries = this.selectedItems;
     userToAdd.firstName = this.userForm.value.firstName;
     userToAdd.lastName = this.userForm.value.lastName;
     this.userService.AddUser(userToAdd).subscribe(c => console.log("user has been added!"));
-  }
-
-  onItemSelect(item: any) {
-    console.log(item);
-  }
-  onSelectAll(items: any) {
-    console.log(items);
   }
 }

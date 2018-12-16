@@ -40,4 +40,12 @@ export class UserService {
   
     return this.http.delete<User>(url, httpOptions);
   }
+
+  EditUser(userToEdit: User) : Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    }; 
+     debugger;
+    return this.http.put(this.usersURL, userToEdit);
+  }
 }

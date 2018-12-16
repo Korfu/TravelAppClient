@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { User } from 'src/app/Models/user';
 import { UserService } from 'src/app/services/user.service';
+import {Location} from '@angular/common';
+
 
 @Component({
   selector: 'app-user-detail',
@@ -13,7 +15,8 @@ export class UserDetailComponent implements OnInit {
    user: User;
 
   constructor(private route: ActivatedRoute,
-              private userService: UserService) { }
+              private userService: UserService,
+              private location: Location) { }
 
   ngOnInit() {
     this.getUser();
@@ -24,4 +27,7 @@ export class UserDetailComponent implements OnInit {
     this.userService.GetUser(id).subscribe(user => this.user = user);
   }
 
+  backClicked() : void {
+    this.location.back();
+  }
 }

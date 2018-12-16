@@ -1,3 +1,17 @@
-<p>
-  delete-user works!
-</p>
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+              <button class="btn btn-danger" (click)="deleteUser(user)">Confirm</button>
+              <button class="btn btn-primary" (click)="backClicked()">Return</button>
+        </div>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+              <h3>Delete User {{user?.firstName}} {{user?.lastName}}</h3>
+              <p>Visited Countries:</p>
+              <ul *ngFor="let country of user?.visitedCountries">
+                <li>{{country?.name}}</li>
+              </ul>
+            </div>
+        </div>
+    </div>
+</div>

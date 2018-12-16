@@ -32,8 +32,4 @@ export class UsersComponent implements OnInit {
   GetCountries(){
     this.countryService.getCountries().subscribe(coutnries => this.countries = this.countries)
   }
-
-  delete(userToDelete: User): void {
-    this.userService.deleteUser(userToDelete).subscribe();
-  }
 }
