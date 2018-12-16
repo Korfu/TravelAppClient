@@ -41,10 +41,10 @@ export class UserService {
   }
 
   EditUser(userToEdit: User) : Observable<any> {
+    const url = `${this.usersURL}/${userToEdit.id}`;
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     }; 
-     debugger;
-    return this.http.put(this.usersURL, userToEdit);
+    return this.http.put<User>(url, userToEdit);
   }
 }

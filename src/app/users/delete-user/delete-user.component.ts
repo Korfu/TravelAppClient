@@ -25,12 +25,7 @@ export class DeleteUserComponent implements OnInit {
     this.userService.GetUser(id).subscribe(user => this.user = user);
   }
 
-  backClicked() : void {
-    this.location.back();
-  }
-
   deleteUser(userToDelete: User): void {
     this.userService.deleteUser(userToDelete).subscribe(success => console.log("User {{user.firstName}} {{user.lastName}} has been deleted"));
-    this.location.back();
   }
 }

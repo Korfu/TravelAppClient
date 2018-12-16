@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { CountryService } from 'src/app/services/country.service';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/Models/user';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-add-user',
@@ -17,7 +18,8 @@ export class AddUserComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private countryService: CountryService,
-              private userService: UserService) {  
+              private userService: UserService,
+              private router: Router) {  
                }
   
   ngOnInit() {
@@ -26,9 +28,10 @@ export class AddUserComponent implements OnInit {
       lastName:  '',
     })
 
+    // this.router= Router;
+
     this.countryService.getCountries().subscribe(countries => {
       this.dropdownList = countries; 
-      debugger;
     } );
     this.selectedItems =[];
     this.dropdownSettings = {
@@ -40,8 +43,6 @@ export class AddUserComponent implements OnInit {
       itemsShowLimit: 3,
       allowSearchFilter: true
     };
-
-    debugger;
   }   
 
   get f() { return this.userForm.controls; }
@@ -52,6 +53,7 @@ export class AddUserComponent implements OnInit {
     userToAdd.firstName = this.userForm.value.firstName;
     userToAdd.lastName = this.userForm.value.lastName;
     this.userService.AddUser(userToAdd).subscribe(c => console.log("user has been added!"));
+    
   }
 
   onItemSelect(item: any) {

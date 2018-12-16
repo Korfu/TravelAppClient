@@ -4,8 +4,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { CountryService } from 'src/app/services/country.service';
 import { UserService } from 'src/app/services/user.service';
 import { ActivatedRoute } from '@angular/router';
-import {Location} from '@angular/common';
-
 
 @Component({
   selector: 'app-edit-user',
@@ -23,8 +21,7 @@ export class EditUserComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
               private countryService: CountryService,
-              private userService: UserService,
-              private location: Location) {  
+              private userService: UserService) {  
                }
   
   ngOnInit() {
@@ -65,9 +62,5 @@ export class EditUserComponent implements OnInit {
     this.user.firstName = this.userForm.value.firstName;
     this.user.lastName = this.userForm.value.lastName;
     this.userService.EditUser(this.user).subscribe(c => console.log("user has been edited!"));
-  }
-
-  backClicked() : void {
-    this.location.back();
   }
 }
