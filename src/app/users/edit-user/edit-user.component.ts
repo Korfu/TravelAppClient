@@ -16,7 +16,7 @@ export class EditUserComponent implements OnInit {
   dropdownList = [];
   selectedItems = [];
   dropdownSettings = {};
-  user : User;
+  public user : User;
 
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
@@ -26,14 +26,12 @@ export class EditUserComponent implements OnInit {
   
   ngOnInit() {
     this.getUser();
-   
     this.userForm = this.formBuilder.group({
       firstName: '',
       lastName:  '',
     })
 
     this.countryService.getCountries().subscribe(countries => this.dropdownList = countries);
-    this.selectedItems =this.user.visitedCountries;
     this.dropdownSettings = {
       singleSelection: false,
       idField: 'id',
@@ -46,7 +44,16 @@ export class EditUserComponent implements OnInit {
   } 
   getUser(): void{
     const id = +this.route.snapshot.paramMap.get('id');
-    this.userService.GetUser(id).subscribe(user => this.user = user);
+    this.userService.GetUser(id).subscribe(user => {
+      this.user = user;
+      let userFormModel = {
+        firstName: user.firstName,
+        lastName: user.lastName
+      }
+      this.userForm.setValue(userFormModel);
+      
+      this.selectedItems = this.user.visitedCountries;
+    });
   }
 
   get f() { return this.userForm.controls; }
