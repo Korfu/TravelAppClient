@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { CountryService } from 'src/app/services/country.service';
 import { UserService } from 'src/app/services/user.service';
 import { ActivatedRoute } from '@angular/router';
+import {Location} from '@angular/common';
+
 
 @Component({
   selector: 'app-edit-user',
@@ -21,7 +23,8 @@ export class EditUserComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
               private countryService: CountryService,
-              private userService: UserService) {  
+              private userService: UserService,
+              private location: Location) {  
                }
   
   ngOnInit() {
@@ -34,7 +37,7 @@ export class EditUserComponent implements OnInit {
     this.countryService.getCountries().subscribe(countries => this.dropdownList = countries);
     this.dropdownSettings = {
       singleSelection: false,
-      idField: 'id',
+      idField: 'countryId',
       textField: 'name',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
@@ -51,17 +54,20 @@ export class EditUserComponent implements OnInit {
         lastName: user.lastName
       }
       this.userForm.setValue(userFormModel);
-      
       this.selectedItems = this.user.visitedCountries;
     });
   }
 
   get f() { return this.userForm.controls; }
 
-  onEdit() {
+  editUser(userToEdit : User) {
     this.user.visitedCountries = this.selectedItems;
     this.user.firstName = this.userForm.value.firstName;
     this.user.lastName = this.userForm.value.lastName;
     this.userService.EditUser(this.user).subscribe(c => console.log("user has been edited!"));
+  }
+
+  backClicked() : void {
+    this.location.back();
   }
 }

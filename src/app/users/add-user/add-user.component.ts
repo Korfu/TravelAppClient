@@ -11,7 +11,6 @@ import { User } from 'src/app/Models/user';
 })
 export class AddUserComponent implements OnInit {
   public userForm: FormGroup;
-  submitted = false;
   dropdownList = [];
   selectedItems = [];
   dropdownSettings = {};
@@ -22,23 +21,27 @@ export class AddUserComponent implements OnInit {
                }
   
   ngOnInit() {
-   
     this.userForm = this.formBuilder.group({
       firstName: '',
       lastName:  '',
     })
 
-    this.countryService.getCountries().subscribe(countries => this.dropdownList = countries);
+    this.countryService.getCountries().subscribe(countries => {
+      this.dropdownList = countries; 
+      debugger;
+    } );
     this.selectedItems =[];
     this.dropdownSettings = {
       singleSelection: false,
-      idField: 'id',
+      idField: 'countryId',
       textField: 'name',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 3,
       allowSearchFilter: true
     };
+
+    debugger;
   }   
 
   get f() { return this.userForm.controls; }
@@ -49,5 +52,12 @@ export class AddUserComponent implements OnInit {
     userToAdd.firstName = this.userForm.value.firstName;
     userToAdd.lastName = this.userForm.value.lastName;
     this.userService.AddUser(userToAdd).subscribe(c => console.log("user has been added!"));
+  }
+
+  onItemSelect(item: any) {
+    console.log(item);
+  }
+  onSelectAll(items: any) {
+    console.log(items);
   }
 }

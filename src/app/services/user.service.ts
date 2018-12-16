@@ -27,7 +27,6 @@ export class UserService {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     }; 
-     debugger;
     return this.http.post(this.usersURL, userToAdd);
   }
 
