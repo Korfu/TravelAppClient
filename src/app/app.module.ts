@@ -16,6 +16,7 @@ import { UserDetailComponent } from './users/user-detail/user-detail.component';
 import { AddUserComponent } from './users/add-user/add-user.component';
 import { EditUserComponent } from './users/edit-user/edit-user.component';
 import { DeleteUserComponent } from './users/delete-user/delete-user.component';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { DeleteUserComponent } from './users/delete-user/delete-user.component';
     AddUserComponent,
     EditUserComponent,
     DeleteUserComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,
